@@ -2,6 +2,10 @@
 
 ### For vim
 
+<div align="center">
+  <img src="https://cdn.rawgit.com/Cu7ious/dotfiles/2b87fafc/assets/images/vim.png" alt="Vim as IDE" style="max-width:100%;">
+</div>
+
 1. Set up [Vundle](https://github.com/VundleVim/Vundle.vim)
 
 ```git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim```
@@ -22,6 +26,11 @@ After this step it should work.
 
 
 ### For zsh
+
+<div align="center">
+  <img src="https://cdn.rawgit.com/Cu7ious/dotfiles/2b87fafc/assets/images/bash.png" alt="Oh-my-ZSH!" style="max-width:100%;">
+</div>
+
 1. install zsh with oh-my-zsh
 
 ```sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"```
@@ -36,6 +45,10 @@ Note that this will not work if Zsh is not in your authorized shells list `(/etc
 6. To enable it for the current session, use `source ~/.zshrc`
 
 ### For bash
+
+<div align="center">
+  <img src="https://cdn.rawgit.com/Cu7ious/dotfiles/2b87fafc/assets/images/bash.png" alt="Bash It!" style="max-width:100%;">
+</div>
 
 1. install bash-it
 ```git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it```
