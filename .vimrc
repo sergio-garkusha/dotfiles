@@ -11,7 +11,6 @@ set shiftwidth=2 "number of space chars for indentation
 set expandtab "insert space characters whenever the tab key is pressed
 set tabstop=2 "space chars inserted when tab key is pressed
 set autoindent
-set expandtab
 set smarttab
 set noerrorbells visualbell t_vb= "turn off annoying bells
 " set nowrap
@@ -20,6 +19,12 @@ set showmatch " set show matching parenthesis
 "Indent
 set autoindent
 set copyindent
+
+"Insert mode with paste
+set paste
+
+"Higlight column #n with color
+set colorcolumn=80
 
 "Detect encoding
 set ffs=unix
@@ -59,8 +64,8 @@ syntax enable
 " colorscheme solarized
 set t_Co=256
 " colorscheme bvemu
-colorscheme autumn
-" colorscheme Monokai
+" colorscheme autumn
+colorscheme Monokai
 " colorscheme zenburn
 
 highlight Cursor guibg=Green guifg=NONE
@@ -80,25 +85,47 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " vim/scripts repos
+" all about surroundings: parentheses, brackets, quotes
 Bundle 'surround.vim'
+" Bundle 'snipMate'
+" Comments/Uncomments line/visual block with \c
 Bundle 'tComment'
 
 " github repos
+" Emmet completions
+" Bundle 'mattn/emmet-vim'
+" File system explorer
 Bundle 'scrooloose/nerdtree'
+" NERDTree panel, independent of tabs
 Bundle 'jistr/vim-nerdtree-tabs'
+" Neat Status Line //github.com/maciakl/vim-neatstatus
 Bundle 'maciakl/vim-neatstatus'
+" Drags selected blocks with arrow keys in VISUAL mode
 Bundle 'gavinbeatty/dragvisuals.vim'
+" Colorschemes //github.com/flazz/vim-colorschemes
 Bundle 'flazz/vim-colorschemes'
+" Automatic closing of quotes parenthesis brackets etc.
 Bundle 'Raimondi/delimitMate'
+" Syntax highlighting and improved indentation
+Plugin 'pangloss/vim-javascript'
+" :saveas <newfile> then rms old filename on disk
 Plugin 'wojtekmach/vim-rename'
+" Fuzyy finder
 Plugin 'ctrlpvim/ctrlp.vim'
+" Opens header files automatically
+Plugin 'vim-scripts/a.vim'
+" Error checking: shows the offending line next to the line numbers
+Plugin 'vim-syntastic/syntastic'
+" ----- Working with Git ----------------------------------------------
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+" Man pages right in vim
+Plugin 'jez/vim-superman'
 
 call vundle#end()
 
 filetype plugin indent on
 
-"==============================[ JSX BLOCK ]===============================
-let g:jsx_pragma_required = 1
 
 "==============================[ HOTKEYS BLOCK ]===============================
 " Comment toggle. Requires tComment plugin
@@ -110,8 +137,6 @@ autocmd FileType html,css EmmetInstall
 
 " NEDRTree Tabs Toggle. Requires nerdtree & vim-nerdtree-tabs plugins
 map <leader>t :NERDTreeTabsToggle<CR>
-" To have NERDTree always open on startup
-let g:nerdtree_tabs_open_on_console_startup = 1
 
 "====[ Make the 81st column stand out ]====================
 
@@ -165,7 +190,7 @@ let g:nerdtree_tabs_open_on_console_startup = 1
 	let g:DVB_TrimWS = 1
 
 
-"====[ Swap v and CTRL-V, because Block mode is more useful that Visual mode ]=
+"====[ Swap v and CTRL-V, because Block mode is more useful than Visual mode ]=
 
     nnoremap    v   <C-V>
     nnoremap <C-V>     v
@@ -173,3 +198,23 @@ let g:nerdtree_tabs_open_on_console_startup = 1
     vnoremap    v   <C-V>
     vnoremap <C-V>     v
 
+"===========================[ Syntastic Settings  ]============================
+ " We need this for plugins like Syntastic and vim-gitgutter which put symbols
+ " in the sign column.
+ hi clear SignColumn
+
+ let g:syntastic_check_on_open = 1
+
+ set statusline+=%#warningmsg#
+ set statusline+=%{SyntasticStatuslineFlag()}
+ set statusline+=%*
+
+ augroup mySyntastic
+   au!
+   au FileType tex let b:syntastic_mode = "passive"
+ augroup END
+
+
+"================================[ Syntastic ]=================================
+" better man page support
+noremap K :SuperMan <cword><CR>
