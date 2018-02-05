@@ -25,24 +25,6 @@
 After this step it should work.
 
 
-### For zsh
-
-<div align="center">
-  <img src="https://cdn.rawgit.com/Cu7ious/dotfiles/2b87fafc/assets/images/bash.png" alt="Oh-my-ZSH!" style="max-width:100%;">
-</div>
-
-1. install zsh with oh-my-zsh
-
-```sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"```
-
-2. Make it your default shell: `chsh -s $(which zsh)`
-
-Note that this will not work if Zsh is not in your authorized shells list `(/etc/shells)` or if you don't have permission to use `chsh`.
-
-3. Log out and login back again to use your new default shell.
-4. Test that it worked with echo $SHELL. Expected result: /bin/zsh or similar.
-5. Copy or make the symlink for `cu7ious.zsh-theme` to ~/.oh-my-zsh/themes
-6. To enable it for the current session, use `source ~/.zshrc`
 
 ### For bash
 
@@ -84,3 +66,23 @@ source "$BASH_IT"/bash_it.sh
 3. Copy or make the symlink for `cu7ious/cu7ious.theme.bash` to ~/.bash_it/themes
 
 4. To enable it for the current session, use `source ~/.bashrc`
+
+
+### For zsh
+
+<div align="center">
+  <img src="https://cdn.rawgit.com/Cu7ious/dotfiles/2b87fafc/assets/images/zsh.png" alt="Oh-my-ZSH!" style="max-width:100%;">
+</div>
+
+1. install zsh with oh-my-zsh
+
+```sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"```
+
+2. Make it your default shell: `chsh -s $(which zsh)`
+
+Note that this will not work if Zsh is not in your authorized shells list `(/etc/shells)` or if you don't have permission to use `chsh`.
+
+3. Log out and login back again to use your new default shell.
+4. Test that it worked with echo $SHELL. Expected result: /bin/zsh or similar.
+5. Copy or make the symlink for `cu7ious.zsh-theme` to ~/.oh-my-zsh/themes
+6. To enable it for the current session, use `source ~/.zshrc`
