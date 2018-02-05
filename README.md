@@ -1,3 +1,5 @@
+# Useful dotfiles and scripts for daily use
+
 ### For vim
 
 1. Set up [Vundle](https://github.com/VundleVim/Vundle.vim)
@@ -31,6 +33,7 @@ Note that this will not work if Zsh is not in your authorized shells list `(/etc
 3. Log out and login back again to use your new default shell.
 4. Test that it worked with echo $SHELL. Expected result: /bin/zsh or similar.
 5. Copy or make the symlink for `cu7ious.zsh-theme` to ~/.oh-my-zsh/themes
+6. To enable it for the current session, use `source ~/.zshrc`
 
 ### For bash
 
@@ -65,4 +68,6 @@ export SCM_CHECK=true
 source "$BASH_IT"/bash_it.sh
 ```
 
-5. Copy or make the symlink for `cu7ious.` to ~/.oh-my-zsh/themes
+3. Copy or make the symlink for `cu7ious/cu7ious.theme.bash` to ~/.bash_it/themes
+
+4. To enable it for the current session, use `source ~/.bashrc`
