@@ -7,24 +7,26 @@ set laststatus=2
 
 set nocompatible "Filetype detection doesn't work well in compatible mode
 set softtabstop=2 "number of space chars a tab counts for
-set shiftwidth=2 "number of space chars for indentation
-set expandtab "insert space characters whenever the tab key is pressed
-set tabstop=2 "space chars inserted when tab key is pressed
-set autoindent
+set shiftwidth=8 "number of space chars for indentation
+" set expandtab "insert space characters whenever the tab key is pressed
+set tabstop=8 "space chars inserted when tab key is pressed
 set smarttab
 set noerrorbells visualbell t_vb= "turn off annoying bells
 " set nowrap
 set showmatch " set show matching parenthesis
 
-"Indent
+" Indent
 set autoindent
 set copyindent
 
-"Insert mode with paste
+" Insert mode with paste
 set paste
 
-"Higlight column #n with color
+" Higlight column #n with color
 set colorcolumn=80
+
+" Highlight the line with a cursor
+set cursorline
 
 "Detect encoding
 set ffs=unix
@@ -66,6 +68,20 @@ set t_Co=256
 " colorscheme bvemu
 " colorscheme autumn
 colorscheme Monokai
+" colorscheme railscasts
+" colorscheme bubblegum-256-dark
+" colorscheme bubblegum-256-light
+" colorscheme burnttoast256
+" colorscheme lapis256
+" colorscheme last256
+" colorscheme lizard256
+" colorscheme seoul256-light
+" colorscheme summerfruit256
+" colorscheme wasabi256
+" colorscheme 256-grayvim
+" colorscheme woju
+" colorscheme wolfpack
+" colorscheme wombat256mod
 " colorscheme zenburn
 
 highlight Cursor guibg=Green guifg=NONE
@@ -98,8 +114,8 @@ Bundle 'tComment'
 Bundle 'scrooloose/nerdtree'
 " NERDTree panel, independent of tabs
 Bundle 'jistr/vim-nerdtree-tabs'
-" Neat Status Line //github.com/maciakl/vim-neatstatus
-Bundle 'maciakl/vim-neatstatus'
+" Neat Status Line //github.com/Cu7ious/vim-neatstatus
+Bundle 'Cu7ious/vim-neatstatus'
 " Drags selected blocks with arrow keys in VISUAL mode
 Bundle 'gavinbeatty/dragvisuals.vim'
 " Colorschemes //github.com/flazz/vim-colorschemes
@@ -121,6 +137,10 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 " Man pages right in vim
 Plugin 'jez/vim-superman'
+" ----- Python --------------------------------------------------------
+" Pep8 auto formatter
+Plugin 'tell-k/vim-autopep8'
+
 
 call vundle#end()
 
@@ -128,6 +148,25 @@ filetype plugin indent on
 
 
 "==============================[ HOTKEYS BLOCK ]===============================
+" Turns off the ruler and line numbers to make it ready for copy/paste
+command CPMode :call CPModeToggle()
+function! CPModeToggle()
+    if &number
+        set nonumber | set colorcolumn=0
+    else
+        set number | set colorcolumn=80
+    endif
+endfunction
+
+command Paste :call PasteToggle()
+function! PasteToggle()
+    if &paste
+        set paste
+    else
+        set nopaste
+    endif
+endfunction
+
 " Comment toggle. Requires tComment plugin
 map <leader>c <c-_><c-_>
 
@@ -204,6 +243,11 @@ map <leader>t :NERDTreeTabsToggle<CR>
  hi clear SignColumn
 
  let g:syntastic_check_on_open = 1
+
+ let g:syntastic_cpp_compiler = 'g++'
+ let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
+ let g:syntastic_python_python_exec = '/usr/bin/python3'
 
  set statusline+=%#warningmsg#
  set statusline+=%{SyntasticStatuslineFlag()}
