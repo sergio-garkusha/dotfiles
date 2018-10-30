@@ -1,7 +1,6 @@
 "General
 set fileformats=unix,dos
 set ruler
-set number
 set hlsearch
 set laststatus=2
 
@@ -24,16 +23,23 @@ set paste
 
 " Higlight column #n with color
 set colorcolumn=80
-
+" Show line numbers
+set number
 " Highlight the line with a cursor
 set cursorline
 
-"Detect encoding
+" Detect encoding
 set ffs=unix
 set fencs=utf-8,cp1251,koi8-r,ucs-2,cp866
 
-"Python syntax highlight
+" Python syntax highlight
 let python_highlight_all = 1
+
+" If it's macOS, adds command that fix backspace behaviour
+" for the Insert Mode
+if $OSTYPE == 'darwin18'
+    set backspace=indent,eol,start
+endif
 
 "Undo
 set undodir=~/.vim/undo
@@ -103,13 +109,17 @@ call vundle#begin()
 " vim/scripts repos
 " all about surroundings: parentheses, brackets, quotes
 Bundle 'surround.vim'
+" Collection of snippets
 " Bundle 'snipMate'
 " Comments/Uncomments line/visual block with \c
 Bundle 'tComment'
 
 " github repos
+
+" Support of .editorconfig
+Plugin 'editorconfig/editorconfig-vim'
 " Emmet completions
-" Bundle 'mattn/emmet-vim'
+Bundle 'mattn/emmet-vim'
 " File system explorer
 Bundle 'scrooloose/nerdtree'
 " NERDTree panel, independent of tabs
@@ -124,7 +134,7 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'Raimondi/delimitMate'
 " Syntax highlighting and improved indentation
 Plugin 'pangloss/vim-javascript'
-" :saveas <newfile> then rms old filename on disk
+" :saves <newfile> then rms old filename on disk
 Plugin 'wojtekmach/vim-rename'
 " Fuzyy finder
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -152,10 +162,12 @@ filetype plugin indent on
 command CPMode :call CPModeToggle()
 function! CPModeToggle()
     if &number
-        set nonumber | set colorcolumn=0
+        set nonumber | set colorcolumn=0 | set cursorline!
     else
-        set number | set colorcolumn=80
+        set number | set colorcolumn=80 | set cursorline
     endif
+
+    execute 'GitGutterToggle'
 endfunction
 
 command Paste :call PasteToggle()
@@ -242,12 +254,19 @@ map <leader>t :NERDTreeTabsToggle<CR>
  " in the sign column.
  hi clear SignColumn
 
+ " Checks file when it's open
  let g:syntastic_check_on_open = 1
 
+ " C++
  let g:syntastic_cpp_compiler = 'g++'
  let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
- let g:syntastic_python_python_exec = '/usr/bin/python3'
+ " Python3
+ let g:syntastic_python_python_exec = '/usr/local/bin/python3'
+
+ " JavaScript
+ let g:syntastic_javascript_checkers = ['standard']
+ let g:syntastic_javascript_standard_exec = 'semistandard'
 
  set statusline+=%#warningmsg#
  set statusline+=%{SyntasticStatuslineFlag()}
