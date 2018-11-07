@@ -1,0 +1,10 @@
+bat
+coreutils
+git
+gnupg2
+mc
+python
+shellcheck
+node
+vim
+yarn
