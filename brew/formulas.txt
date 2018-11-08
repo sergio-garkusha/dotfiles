@@ -1,10 +1,10 @@
 bat
 coreutils
-git
 gnupg2
 mc
+node
 python
 shellcheck
-node
+tmux
 vim
 yarn
