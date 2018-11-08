@@ -1,0 +1,17 @@
+bash-it
+brew
+defaults
+docker-compose
+docker
+git
+go
+makefile
+npm
+nvm
+pip3
+ssh
+system
+terraform
+tmux
+todo
+vagrant
