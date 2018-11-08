@@ -65,6 +65,18 @@ EOM
 
         # links colorschemes from bundle to vim root folder
         ln -s ~/.vim/bundle/vim-colorschemes/colors ~/.vim/
+
+    # bin magic
+        osToExclude="_Ubuntu."
+        toTrim="_macOS"
+        mkdir ~/bin
+
+        for script in ./bin/*; do
+            if [[ $script != *"$osToExclude"* ]]; then
+                script=${script#"./bin/"}
+                ln -s "$PWD/bin/$script" "$HOME/_bin/${script//$toTrim/}"
+            fi
+        done
 else
 # If the os is not macOS (assuming Ubuntu)
     exit 0
