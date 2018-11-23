@@ -6,5 +6,6 @@ node
 python
 shellcheck
 tmux
+tree
 vim
 yarn
