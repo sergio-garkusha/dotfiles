@@ -77,6 +77,9 @@ EOM
                 ln -s "$PWD/bin/$script" "$HOME/_bin/${script//$toTrim/}"
             fi
         done
+
+    # mc magic
+    ln -s "$(pwd)/themes/mc/skins" ~/.local/share/mc
 else
 # If the os is not macOS (assuming Ubuntu)
     exit 0
