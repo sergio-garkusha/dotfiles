@@ -1,16 +1,16 @@
-"General
+" General
 set fileformats=unix,dos
 set ruler
 set hlsearch
 set laststatus=2
 
-set nocompatible "Filetype detection doesn't work well in compatible mode
-set softtabstop=2 "number of space chars a tab counts for
-set shiftwidth=8 "number of space chars for indentation
-" set expandtab "insert space characters whenever the tab key is pressed
-set tabstop=8 "space chars inserted when tab key is pressed
+set nocompatible " Enter the current Millenium
+set softtabstop=2 " number of space chars a tab counts for
+set shiftwidth=8 " number of space chars for indentation
+" set expandtab " insert space characters whenever the tab key is pressed
+set tabstop=8 " space chars inserted when tab key is pressed (In honor of C!)
 set smarttab
-set noerrorbells visualbell t_vb= "turn off annoying bells
+set noerrorbells visualbell t_vb= " turn off bells
 " set nowrap
 set showmatch " set show matching parenthesis
 
@@ -20,6 +20,13 @@ set copyindent
 
 " Insert mode with paste
 set paste
+
+" Fuzzy Finder feature
+    filetype plugin on
+
+    set path+=** " adds $CWD to the search path
+    set wildmenu " enables wildcards for completion (menus, buffers, files...)
+"END
 
 " Higlight column #n with color
 set colorcolumn=80
@@ -63,9 +70,6 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 "using :e, without being forced to write or undo your changes first. Also,
 "undo buffers and marks are preserved while the buffer is open
 set hidden
-
-" Filetype plugins
-" filetype plugin indent on
 
 "Color
 syntax enable
@@ -134,10 +138,11 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'Raimondi/delimitMate'
 " Syntax highlighting and improved indentation
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 " :saves <newfile> then rms old filename on disk
 Plugin 'wojtekmach/vim-rename'
-" Fuzyy finder
-Plugin 'ctrlpvim/ctrlp.vim'
+" Fuzzy finder (Not needed because of vim's default behavior)
+" Plugin 'ctrlpvim/ctrlp.vim'
 " Opens header files automatically
 Plugin 'vim-scripts/a.vim'
 " Error checking: shows the offending line next to the line numbers
@@ -154,7 +159,7 @@ Plugin 'tell-k/vim-autopep8'
 
 call vundle#end()
 
-filetype plugin indent on
+" filetype plugin indent on
 
 
 "==============================[ HOTKEYS BLOCK ]===============================
@@ -182,9 +187,15 @@ endfunction
 " Comment toggle. Requires tComment plugin
 map <leader>c <c-_><c-_>
 
-let g:user_emmet_mode='i'
+" Emmet
+let g:user_emmet_settings = {
+\  'javascript.jsx': {
+\      'extends': 'jsx',
+\      'quote_char': "'"
+\  },
+\}
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,jsx,css EmmetInstall
 
 " NEDRTree Tabs Toggle. Requires nerdtree & vim-nerdtree-tabs plugins
 map <leader>t :NERDTreeTabsToggle<CR>
