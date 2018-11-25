@@ -1,6 +1,7 @@
 bat
 coreutils
 gnupg2
+go
 mc
 node
 python
