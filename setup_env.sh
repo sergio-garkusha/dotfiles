@@ -80,6 +80,9 @@ EOM
 
     # mc magic
     ln -s "$(pwd)/themes/mc/skins" ~/.local/share/mc
+
+    # TypeScript magic
+    npm i -g typescript
 else
 # If the os is not macOS (assuming Ubuntu)
     exit 0
