@@ -83,6 +83,13 @@ EOM
 
     # TypeScript magic
     npm i -g typescript
+
+    # VSCode magic
+    curl -Lo VSCode-darwin-stable.zip \
+        https://go.microsoft.com/fwlink/?LinkID=620882
+    VSCode-darwin-stable.zip
+    unzip VSCode-darwin-stable.zip -d /Applications
+    rm -rf VSCode-darwin-stable.zip
 else
 # If the os is not macOS (assuming Ubuntu)
     exit 0
