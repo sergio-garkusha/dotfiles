@@ -32,7 +32,7 @@ EOM
         ln -s "$(pwd)/.bash_aliases" ~/
 
         # link theme
-        ln -s "$(pwd)/themes/cu7ious/" ~/.bash_it/themes
+        ln -s "$(pwd)/themes/bash_it/cu7ious/" ~/.bash_it/themes
 
         # Test and apply it
         #shellcheck source=/dev/null
