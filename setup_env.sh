@@ -2,8 +2,12 @@
 # This script sets up a convenient environment
 # Set of useful CLI programs and configs
 
-if [ "$OSTYPE" == "darwin18" ]; then
+if [[ $OSTYPE =~ "darwin" ]] ; then
 # If the os is macOS
+    echo "Setting up the environment for macOS..."
+    # XCode magic
+        xcode-select --install
+
     # Bash magic
         # installs bash-it framework
         git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
@@ -74,7 +78,7 @@ EOM
         for script in ./bin/*; do
             if [[ $script != *"$osToExclude"* ]]; then
                 script=${script#"./bin/"}
-                ln -s "$PWD/bin/$script" "$HOME/_bin/${script//$toTrim/}"
+                ln -s "$PWD/bin/$script" "$HOME/bin/${script//$toTrim/}"
             fi
         done
 
@@ -90,7 +94,11 @@ EOM
     VSCode-darwin-stable.zip
     unzip VSCode-darwin-stable.zip -d /Applications
     rm -rf VSCode-darwin-stable.zip
+
+elif [[ $OSTYPE =~ "ubuntu" ]] ; then
+# If the os is Ubuntu
+    echo "Ubuntu is coming soon"
 else
-# If the os is not macOS (assuming Ubuntu)
+    echo "Your operating system is $OSTYPE and it's currently not supported"
     exit 0
 fi
