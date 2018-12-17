@@ -29,7 +29,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # Path to the bash it configuration (OS depenent)
-if [ "$OSTYPE" == 'darwin18' ]; then
+if [[ $OSTYPE =~ 'darwin' ]] ; then
     export BASH_IT="/Users/$USER/.bash_it"
 else
     export BASH_IT="/home/$USER/.bash_it"
