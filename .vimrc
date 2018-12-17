@@ -44,7 +44,7 @@ let python_highlight_all = 1
 
 " If it's macOS, adds command that fix backspace behaviour
 " for the Insert Mode
-if $OSTYPE == 'darwin18'
+if $OSTYPE =~ 'darwin'
     set backspace=indent,eol,start
 endif
 
