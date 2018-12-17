@@ -26,11 +26,11 @@ LS_COLORS=$LS_COLORS:'di=1;04;32:'; export LS_COLORS # green
 
 
 # enable color support of ls and also add handy aliases
-if [ "$OSTYPE" == darwin18 ]; then
+if [[ $OSTYPE =~ "darwin" ]] ; then
     # This will work for macOS
 
     # Latest vim (brew install vim)
-    alias vim='OSTYPE=darwin18 /usr/local/bin/vim/'
+    alias vim='OSTYPE=darwin /usr/local/bin/vim/'
 
     # GNU coreutils (brew install coreutils)
     # `g` prefix is the GNU equivalent, e.g. `gls -la == ls -la`
