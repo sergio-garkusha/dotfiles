@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
 # Finds files by name in a current directory.
-# If specified, excludes subpathes
+# If specified, excludes subpaths
 
 count=1
 dirs_to_skip="-type d ("
+
+if [ $# == 1 ] ; then
+   dirs_to_skip="$dirs_to_skip -path ./.git/"
+   dirs_to_skip="$dirs_to_skip -o -path ./node_modules/"
+fi
 
 for arg in "$@" ; do
     if [ $count == 1 ] ; then
