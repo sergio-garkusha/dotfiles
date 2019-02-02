@@ -6,9 +6,9 @@ set laststatus=2
 
 set nocompatible " Enter the current Millenium
 set softtabstop=2 " number of space chars a tab counts for
-set shiftwidth=8 " number of space chars for indentation
+set shiftwidth=2 " number of space chars for indentation
 " set expandtab " insert space characters whenever the tab key is pressed
-set tabstop=8 " space chars inserted when tab key is pressed (In honor of C!)
+set tabstop=2 " space chars inserted when tab key is pressed (In honor of C!)
 set smarttab
 set noerrorbells visualbell t_vb= " turn off bells
 " set nowrap
@@ -144,9 +144,11 @@ Plug 'flazz/vim-colorschemes'
 " Automatic closing of quotes parenthesis brackets etc.
 Plug 'Raimondi/delimitMate'
 
-" Syntax highlighting and improved indentation of .js/.jsx files
+" Syntax highlighting and improved indentation of .js, .jsx & .tsx files
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 
 " :saves <newfile> then rms old filename on disk
 Plug 'wojtekmach/vim-rename'
@@ -171,6 +173,8 @@ Plug 'tpope/vim-fugitive'
 " Initialize plugin system
 call plug#end()
 
+let b:ale_linters = {'typescript': ['tslint']}
+let g:EditorConfig_core_mode = 'python_external'
 
 "==============================[ HOTKEYS BLOCK ]===============================
 " Turns off the ruler and line numbers to make it ready for copy/paste
