@@ -98,6 +98,9 @@ EOM
 elif [[ $OSTYPE =~ "ubuntu" ]] ; then
 # If the os is Ubuntu
     echo "Ubuntu is coming soon"
+    # tmux magic
+    ln -s "$(pwd)/.tmux.conf" ~/
+
 else
     echo "Your operating system is $OSTYPE and it's currently not supported"
     exit 0

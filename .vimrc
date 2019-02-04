@@ -155,6 +155,17 @@ Plug 'wojtekmach/vim-rename'
 " Opens header files automatically
 Plug 'vim-scripts/a.vim'
 
+" Indent guidelines
+Plug 'Yggdroot/indentLine'
+" let g:indentLine_char = '⎸'
+
+" TypeScript and TSX
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+
 " Error checking: shows the offending line next to the line numbers
 " Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
@@ -172,6 +183,7 @@ Plug 'tpope/vim-fugitive'
 
 " Initialize plugin system
 call plug#end()
+filetype plugin indent on
 
 let b:ale_linters = {'typescript': ['tslint']}
 let g:EditorConfig_core_mode = 'python_external'
@@ -186,7 +198,8 @@ function! CPModeToggle()
         set number | set colorcolumn=80 | set cursorline
     endif
 
-    execute 'GitGutterToggle'
+    GitGutterToggle
+    IndentLinesToggle
 endfunction
 
 command Paste :call PasteToggle()
@@ -209,7 +222,7 @@ let g:user_emmet_settings = {
 \  },
 \}
 let g:user_emmet_install_global = 0
-autocmd FileType html,jsx,css EmmetInstall
+autocmd FileType html,jsx,tsx,css EmmetInstall
 
 " NEDRTree Tabs Toggle. Requires nerdtree & vim-nerdtree-tabs plugins
 map <leader>t :NERDTreeTabsToggle<CR>
