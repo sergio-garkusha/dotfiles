@@ -4,7 +4,8 @@
 # It has conditions for both macOS and Linux (Ubuntu)
 
 # Different directory colors for quick use with ls/gls
-LS_COLORS=$LS_COLORS:'di=1;04;32:'; export LS_COLORS # green
+# LS_COLORS=$LS_COLORS:'di=1;04;32:'; export LS_COLORS # green
+
 # LS_COLORS=$LS_COLORS:'di=01;04;93:'; export LS_COLORS # bold;underlined;yellow
 # LS_COLORS=$LS_COLORS:'di=1;47:' ; export LS_COLORS # white on light grey
 # LS_COLORS=$LS_COLORS:'di=1;46:' ; export LS_COLORS # white on biruza
@@ -26,28 +27,31 @@ LS_COLORS=$LS_COLORS:'di=1;04;32:'; export LS_COLORS # green
 
 
 # enable color support of ls and also add handy aliases
-if [ "$OSTYPE" == darwin18 ]; then
+if [[ $OSTYPE =~ "darwin" ]] ; then
     # This will work for macOS
 
     # Latest vim (brew install vim)
-    alias vim='OSTYPE=darwin18 /usr/local/bin/vim/'
+    alias vim='OSTYPE=darwin /usr/local/bin/vim/'
 
     # GNU coreutils (brew install coreutils)
     # `g` prefix is the GNU equivalent, e.g. `gls -la == ls -la`
-    alias l='gls --color=auto'
-    alias ll='LC_COLLATE="C" LC_ALL="C" gls -FlhA --color=auto --group-directories-first'
+    # alias l='gls --color=auto'
+    # alias ll='LC_COLLATE="C" LC_ALL="C" gls -FlhA --color=auto --group-directories-first'
 
     alias dir='gdir --color=auto'
     alias vdir='gvdir --color=auto'
 else
     # Assuming Ubuntu Linux
     alias ls='ls --color=auto'
-    alias l='ls'
-    alias ll='LC_COLLATE="C" LC_ALL="C" ls -FlhA --color=auto --group-directories-first'
+    # alias l='ls'
+    # alias ll='LC_COLLATE="C" LC_ALL="C" ls -FlhA --color=auto --group-directories-first'
 
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 fi
+
+alias l='exa --group-directories-first'
+alias ll='exa -la --group-directories-first'
 
 # Grep colors
 alias grep='grep --color=auto'

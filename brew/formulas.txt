@@ -1,5 +1,6 @@
 bat
 coreutils
+dep
 gnupg2
 go
 mc

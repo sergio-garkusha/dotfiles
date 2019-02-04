@@ -6,9 +6,9 @@ set laststatus=2
 
 set nocompatible " Enter the current Millenium
 set softtabstop=2 " number of space chars a tab counts for
-set shiftwidth=8 " number of space chars for indentation
+set shiftwidth=2 " number of space chars for indentation
 " set expandtab " insert space characters whenever the tab key is pressed
-set tabstop=8 " space chars inserted when tab key is pressed (In honor of C!)
+set tabstop=2 " space chars inserted when tab key is pressed (In honor of C!)
 set smarttab
 set noerrorbells visualbell t_vb= " turn off bells
 " set nowrap
@@ -44,7 +44,7 @@ let python_highlight_all = 1
 
 " If it's macOS, adds command that fix backspace behaviour
 " for the Insert Mode
-if $OSTYPE == 'darwin18'
+if $OSTYPE =~ 'darwin'
     set backspace=indent,eol,start
 endif
 
@@ -102,65 +102,79 @@ let g:session_autosave="yes"
 let g:session_default_to_last="yes"
 
 
-"================================[ VUNDLE BLOCK"]==============================
-filetype off  "required!
+"================================[ Bundler block: Plug ]=======================
+" On a first launch, it autoloads Plug & installs all required plugins
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#rc()
-
-call vundle#begin()
-
-" vim/scripts repos
+call plug#begin('~/.vim/plugged')
 " all about surroundings: parentheses, brackets, quotes
-Bundle 'surround.vim'
+" Plug 'surround.vim'
+
 " Collection of snippets
 " Bundle 'snipMate'
-" Comments/Uncomments line/visual block with \c
-Bundle 'tComment'
 
-" github repos
+" Comments/Uncomments line/visual block with \c
+Plug 'tomtom/tcomment_vim'
 
 " Support of .editorconfig
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
+
 " Emmet completions
-Bundle 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
+
 " File system explorer
-Bundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
+
 " NERDTree panel, independent of tabs
-Bundle 'jistr/vim-nerdtree-tabs'
+Plug 'jistr/vim-nerdtree-tabs'
+
 " Neat Status Line //github.com/Cu7ious/vim-neatstatus
-Bundle 'Cu7ious/vim-neatstatus'
+Plug 'Cu7ious/vim-neatstatus'
+
 " Drags selected blocks with arrow keys in VISUAL mode
-Bundle 'gavinbeatty/dragvisuals.vim'
+Plug 'gavinbeatty/dragvisuals.vim'
+
 " Colorschemes //github.com/flazz/vim-colorschemes
-Bundle 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
+
 " Automatic closing of quotes parenthesis brackets etc.
-Bundle 'Raimondi/delimitMate'
-" Syntax highlighting and improved indentation
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plug 'Raimondi/delimitMate'
+
+" Syntax highlighting and improved indentation of .js, .jsx & .tsx files
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
+
 " :saves <newfile> then rms old filename on disk
-Plugin 'wojtekmach/vim-rename'
-" Fuzzy finder (Not needed because of vim's default behavior)
-" Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'wojtekmach/vim-rename'
 " Opens header files automatically
-Plugin 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim'
+
 " Error checking: shows the offending line next to the line numbers
-Plugin 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
+
 " ----- Working with Git ----------------------------------------------
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
 " Man pages right in vim
-Plugin 'jez/vim-superman'
+" Plug 'jez/vim-superman'
+
 " ----- Python --------------------------------------------------------
 " Pep8 auto formatter
-Plugin 'tell-k/vim-autopep8'
+" Plugin 'tell-k/vim-autopep8'
 
+" Initialize plugin system
+call plug#end()
 
-call vundle#end()
-
-" filetype plugin indent on
-
+let b:ale_linters = {'typescript': ['tslint']}
+let g:EditorConfig_core_mode = 'python_external'
 
 "==============================[ HOTKEYS BLOCK ]===============================
 " Turns off the ruler and line numbers to make it ready for copy/paste
@@ -263,30 +277,30 @@ map <leader>t :NERDTreeTabsToggle<CR>
 "===========================[ Syntastic Settings  ]============================
  " We need this for plugins like Syntastic and vim-gitgutter which put symbols
  " in the sign column.
- hi clear SignColumn
-
- " Checks file when it's open
- let g:syntastic_check_on_open = 1
-
- " C++
- let g:syntastic_cpp_compiler = 'g++'
- let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-
- " Python3
- let g:syntastic_python_python_exec = '/usr/local/bin/python3'
-
- " JavaScript
- let g:syntastic_javascript_checkers = ['standard']
- let g:syntastic_javascript_standard_exec = 'semistandard'
-
- set statusline+=%#warningmsg#
- set statusline+=%{SyntasticStatuslineFlag()}
- set statusline+=%*
-
- augroup mySyntastic
-   au!
-   au FileType tex let b:syntastic_mode = "passive"
- augroup END
+"  hi clear SignColumn
+"
+"  " Checks file when it's open
+"  let g:syntastic_check_on_open = 1
+"
+"  " C++
+"  let g:syntastic_cpp_compiler = 'g++'
+"  let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+"
+"  " Python3
+"  let g:syntastic_python_python_exec = '/usr/local/bin/python3'
+"
+"  " JavaScript
+"  let g:syntastic_javascript_checkers = ['standard']
+"  let g:syntastic_javascript_standard_exec = 'semistandard'
+"
+"  set statusline+=%#warningmsg#
+"  set statusline+=%{SyntasticStatuslineFlag()}
+"  set statusline+=%*
+"
+"  augroup mySyntastic
+"    au!
+"    au FileType tex let b:syntastic_mode = 'passive'
+"  augroup END
 
 
 "================================[ Syntastic ]=================================

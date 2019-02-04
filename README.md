@@ -6,6 +6,8 @@
   <img src="https://cdn.rawgit.com/Cu7ious/dotfiles/2b87fafc/assets/images/vim.png" alt="Vim as IDE" style="max-width:100%;">
 </div>
 
+A bit of inspiration in [Setting up Vim for React](https://drivy.engineering/setting-up-vim-for-react/)
+
 1. Set up [Vundle](https://github.com/VundleVim/Vundle.vim)
 
 ```git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim```
