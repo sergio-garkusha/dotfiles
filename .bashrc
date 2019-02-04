@@ -55,6 +55,7 @@ export BASH_IT_THEME='cu7ious'
 # bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind 'set completion-ignore-case on'
+# set -o vi
 
 # Load Bash It
 # shellcheck source=/dev/null
