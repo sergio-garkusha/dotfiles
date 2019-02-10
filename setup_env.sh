@@ -95,6 +95,10 @@ EOM
     unzip VSCode-darwin-stable.zip -d /Applications
     rm -rf VSCode-darwin-stable.zip
 
+    #Alacritty magic
+    # @TODO: download & install latest release
+    ln -s "$(pwd)/alacritty.yml" ~/
+
 elif [[ $OSTYPE =~ "ubuntu" ]] ; then
 # If the os is Ubuntu
     echo "Ubuntu is coming soon"
