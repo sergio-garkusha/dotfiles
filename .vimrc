@@ -96,6 +96,17 @@ colorscheme Monokai
 
 highlight Cursor guibg=Green guifg=NONE
 
+" Netrw
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
+
 " vim-session
 let g:session_autoload="yes"
 let g:session_autosave="yes"
@@ -180,13 +191,17 @@ let g:EditorConfig_core_mode = 'python_external'
 " Turns off the ruler and line numbers to make it ready for copy/paste
 command CPMode :call CPModeToggle()
 function! CPModeToggle()
+		if IsNerdTreeEnabled()
+			:call C7NERDTreeTabsToggle()
+		endif
+
     if &number
         set nonumber | set colorcolumn=0 | set cursorline!
+				execute 'GitGutterToggle'
     else
         set number | set colorcolumn=80 | set cursorline
+				execute 'GitGutterToggle'
     endif
-
-    execute 'GitGutterToggle'
 endfunction
 
 command Paste :call PasteToggle()
@@ -212,7 +227,25 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,jsx,css EmmetInstall
 
 " NEDRTree Tabs Toggle. Requires nerdtree & vim-nerdtree-tabs plugins
-map <leader>t :NERDTreeTabsToggle<CR>
+" map <leader>t :NERDTreeTabsToggle<CR>
+map <leader>t :call C7NERDTreeTabsToggle()<CR>
+
+function! C7NERDTreeTabsToggle()
+	NERDTreeTabsToggle
+	:call ToggleStatusLine()
+endfunction
+
+function! IsNerdTreeEnabled()
+  return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+endfunction
+
+function! ToggleStatusLine()
+	if IsNerdTreeEnabled()
+		set ls=0
+	else
+		set ls=2
+	endif
+endfunction
 
 "====[ Make the 81st column stand out ]====================
 
