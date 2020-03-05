@@ -74,7 +74,7 @@ set hidden
 "Color
 syntax enable
 " colorscheme solarized
-set t_Co=256
+" set t_Co=256
 " colorscheme bvemu
 " colorscheme autumn
 colorscheme Monokai
@@ -84,9 +84,6 @@ colorscheme Monokai
 " colorscheme burnttoast256
 " colorscheme lapis256
 " colorscheme last256
-" colorscheme lizard256
-" colorscheme seoul256-light
-" colorscheme summerfruit256
 " colorscheme wasabi256
 " colorscheme 256-grayvim
 " colorscheme woju
@@ -169,6 +166,9 @@ Plug 'vim-scripts/a.vim'
 " Error checking: shows the offending line next to the line numbers
 " Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
+
+" Plug 'majutsushi/tagbar'
+" Plug 'ludovicchabant/vim-gutentags'
 
 " ----- Working with Git ----------------------------------------------
 Plug 'airblade/vim-gitgutter'
@@ -338,4 +338,4 @@ endfunction
 
 "================================[ Syntastic ]=================================
 " better man page support
-noremap K :SuperMan <cword><CR>
+" noremap K :SuperMan <cword><CR>
