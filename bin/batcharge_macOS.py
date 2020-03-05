@@ -6,7 +6,7 @@
 # http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/#my-right-prompt-battery-capacity
 import math, subprocess
 
-
+# $ ioreg -rc AppleSmartBattery
 p = subprocess.Popen(["ioreg", "-rc", "AppleSmartBattery"], stdout=subprocess.PIPE)
 output = p.communicate()[0]
 
@@ -20,7 +20,7 @@ charge = b_cur / b_max
 charge_threshold = int(math.ceil(10 * charge))
 
 # Output
-total_slots, slots = 10, []
+total_slots = 10
 filled = int(math.ceil(charge_threshold * (total_slots / 10.0))) * u'◼'
 empty = (total_slots - len(filled)) * u'◻'
 
