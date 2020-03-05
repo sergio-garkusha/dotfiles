@@ -17,7 +17,7 @@ __clock() {
 }
 
 __bat_charge() {
-	echo "$(~/bin/batcharge.py) "
+	echo "$(~/bin/batcharge) "
 }
 
 [[ "$USER" == "root" ]] && userColor="${red}" || userColor="${yellow}"
