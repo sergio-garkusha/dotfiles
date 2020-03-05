@@ -57,15 +57,15 @@ EOM
         ln -s "$(pwd)/.vimrc" ~/
 
         # install Vim plugin manager
-        git clone https://github.com/VundleVim/Vundle.vim.git \
-            ~/.vim/bundle/Vundle.vim
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
         # create folders for .swp files
         mkdir -p ~/.vim/tmp
         mkdir -p ~/.vim/undo
 
-        # install vim plugins via Vundle
-        vim +PluginInstall +qall
+        # install vim plugins via vim-plug
+        vim +PlugInstall +qall
 
         # links colorschemes from bundle to vim root folder
         ln -s ~/.vim/bundle/vim-colorschemes/colors ~/.vim/
@@ -103,6 +103,6 @@ elif [[ $OSTYPE =~ "ubuntu" ]] ; then
 # If the os is Ubuntu
     echo "Ubuntu is coming soon"
 else
-    echo "Your operating system is $OSTYPE and it's currently not supported"
+    echo "Your operating system, $OSTYPE, is not supported"
     exit 0
 fi
