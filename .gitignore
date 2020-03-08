@@ -1,3 +1,4 @@
 # Misc
 tags
 bin/.mypy_cache/
+*.swp
