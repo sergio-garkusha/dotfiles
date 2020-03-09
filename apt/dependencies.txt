@@ -1,0 +1,15 @@
+git
+acpi
+bat
+# exa # currently is not in apt, use cargo install exa
+# dep
+gnupg2
+# go
+mc
+# node
+# python
+shellcheck
+tmux
+tree
+# vim
+# yarn
