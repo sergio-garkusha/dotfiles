@@ -99,9 +99,58 @@ EOM
     # @TODO: download & install latest release
     ln -s "$(pwd)/alacritty.yml" ~/
 
-elif [[ $OSTYPE =~ "ubuntu" ]] ; then
+elif [[ $OSTYPE =~ "linux-gnu" ]] ; then
 # If the os is Ubuntu
-    echo "Ubuntu is coming soon"
+    echo "Ubuntu is in beta"
+
+    # Rust magic
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+    # Apt magic
+        # install required formulas
+        while read -r dependency; do
+            sudo apt install "$dependency" -y
+        done < apt/dependencies.txt
+	# cleaning just in case
+	sudo apt autoremove -y
+
+    # VS Code magic
+    sudo snap install code --classic
+
+    # @TODO double-check it
+    # Bash magic
+        # installs bash-it framework
+        git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+
+        # check if .bash_profile is there
+        if [ -f ~/.bash_profile ]; then
+            if ! grep -Fq "source ~/.bashrc" ~/.bash_profile; then
+                cat >> ~/.bash_profile <<- EOM
+if [ -r ~/.bashrc ]; then
+    # shellcheck source=/dev/null
+    source ~/.bashrc
+fi
+EOM
+            fi
+        else
+            cat > ~/.bash_profile <<- EOM
+if [ -r ~/.bashrc ]; then
+    # shellcheck source=/dev/null
+    source ~/.bashrc
+fi
+EOM
+        fi
+
+        # Symlink .bashrc and .bash_aliases
+        ln -s "$(pwd)/.bashrc" ~/
+        ln -s "$(pwd)/.bash_aliases" ~/
+
+        # link theme
+        ln -s "$(pwd)/themes/bash_it/cu7ious/" ~/.bash_it/themes
+
+        # Test and apply it
+        #shellcheck source=/dev/null
+        source ~/.bash_profile
 else
     echo "Your operating system, $OSTYPE, is not supported"
     exit 0
